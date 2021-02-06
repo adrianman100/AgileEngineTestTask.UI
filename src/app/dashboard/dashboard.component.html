@@ -1,0 +1,42 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Transaction history</h5>
+          <mat-accordion displayMode="flat" multi #accordion="matAccordion">
+            <section class="acc-header-row">
+              <span fxFlex="30%" class="acc-header-cell">Transaction Type</span>
+              <span fxFlex="70%">Amount</span>
+            </section>
+
+            <mat-expansion-panel (opened)="beforePanelOpened(panel)" (closed)="beforePanelClosed(panel)"
+              (afterCollapse)="afterPanelClosed($event)" (afterExpand)="afterPanelOpened($event)"
+              *ngFor="let panel of transactionList" #mapanel="matExpansionPanel">
+              <mat-expansion-panel-header
+                [ngStyle]="panel.type == 'debit' ? {'background': '#FFCCCB'} : {'background': '#90EE90'}"
+                class="">
+                <mat-panel-title fxFlex="30%">
+                        {{panel.type}}
+                      </mat-panel-title>
+                      <mat-panel-title fxFlex="70%">
+                            {{panel.amount}}
+                      </mat-panel-title>
+                <mat-panel-description>
+
+                </mat-panel-description>
+              </mat-expansion-panel-header>
+              <div fxLayout="column" fxLayoutAlign="space-around start" > 
+                  <p>Id: {{panel.id}}</p>
+                  <p>Transaction Type: {{panel.type}}</p>
+                    <p>Amount: {{panel.amount | currency}}</p>
+                    <p>Effective Date: {{panel.effectiveDate | date}}</p>
+              </div>
+
+            </mat-expansion-panel>
+          </mat-accordion>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
